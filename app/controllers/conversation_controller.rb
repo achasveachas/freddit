@@ -2,12 +2,12 @@ class ConversationsController < ApplicationController
 
   #Index Controller
   get "/conversations" do
-    erb :"/conversations/index"
+    erb :"/conversations/index.html"
   end
 
   #New Item Controllers
   get "/conversations/new" do
-    erb :"/conversations/new"
+    erb :"/conversations/new.html"
   end
 
   post "/conversations" do
@@ -18,12 +18,12 @@ class ConversationsController < ApplicationController
 
   #Show Item Controller
   get "/conversations/:slug" do
-    erb :"/conversations/show"
+    erb :"/conversations/show.html"
   end
 
   #Edit Item Controller
   get "/conversations/:slug/edit" do
-    erb :"/conversations/edit"
+    erb :"/conversations/edit.html"
   end
 
   patch "/conversations" do

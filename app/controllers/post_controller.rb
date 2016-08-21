@@ -2,12 +2,12 @@ class PostsController < ApplicationController
 
   #Index Controller
   get "/posts" do
-    erb :"/posts/index"
+    erb :"/posts/index.html"
   end
 
   #New Item Controllers
   get "/posts/new" do
-    erb :"/posts/new"
+    erb :"/posts/new.html"
   end
 
   post "/posts" do
@@ -18,12 +18,12 @@ class PostsController < ApplicationController
 
   #Show Item Controller
   get "/posts/:slug" do
-    erb :"/posts/show"
+    erb :"/posts/show.html"
   end
 
   #Edit Item Controller
   get "/posts/:slug/edit" do
-    erb :"/posts/edit"
+    erb :"/posts/edit.html"
   end
 
   patch "/posts" do

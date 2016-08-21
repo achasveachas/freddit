@@ -15,11 +15,22 @@
 </head>
 <body>
   <div class="wrapper">
+    <header class="branding">
+      <% if logged_in? %>
+        Welcome, <%= "#{current_user.username}" %>!<br>
+        <a href="/users/<%= "#{current_user.username}" %>">My Profile.</a>
+        <a href="/logout">Sign Out</a><br>
+      <% else %>
+        Welcome!
+        <a href="/signup">Sign up</a>
+        <a href="/login">Log In</a><br>
+      <% end %>
+    </header>
 
       <%= yield %>
 
     <footer class="branding">
-      <small>&copy; 2016 <strong>Freddit</strong></small>
+      <small>&copy; 2016 <strong><a href="http://yechiel.me">Yechiel K.</a></strong></small>
     </footer>
   </div>
 

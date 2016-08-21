@@ -7,5 +7,4 @@ end
 run ApplicationController
 use UsersController
 use ConversationsController
-use ThreadsController
 use PostsController
