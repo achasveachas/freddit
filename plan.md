@@ -1,6 +1,6 @@
 Models
   User
-    Has many threads
+    Has many conversations
     has many posts
     has the following attributes:
       Required:
@@ -14,14 +14,14 @@ Models
         number of posts
         moderator/admin
 
-  Thread
+  conversation
     Belongs to a User
     Has many posts
     Has an OP
 
   Post
     Belongs to a User
-    Belongs to a Thread
+    Belongs to a conversation
     Has a time_created and time_modified
 
 Controllers
@@ -32,15 +32,15 @@ Controllers
     Users index(mod only)
     Ban/unban(mod only)
     Profile page
-    User's threads
+    User's conversations
     User's posts
     Edit profile
     Delete account(user and admin only)
 
-  Thread
-    Thread index
-    Individual thread
-    New thread
+  conversation
+    conversation index
+    Individual conversation
+    New conversation
     Edit OP
 
   Post
@@ -53,15 +53,15 @@ Views
    signup form
    login form
    profile page
-   all threads from user
+   all conversations from user
    all posts from user
    edit profile form
    users index
 
 
-  Thread
-    thread index
-    individual thread (include new post form)
+  conversation
+    conversation index
+    individual conversation (include new post form)
     edit/delete OP form
 
   Post
