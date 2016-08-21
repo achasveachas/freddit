@@ -3,7 +3,9 @@
 <h2>Join the converstion:</h2><br>
 <% Conversation.all.last(10).reverse.each do |convo| %>
 <h3><a href="/conversations/<%="#{convo.id}" %>"><%="#{convo.topic}" %></a></h3>
-<p>Started at <%="#{convo.created_at}" %> by  <a href="/users/<%="#{convo.user.username}" %>"><%="#{convo.user.username}" %></a> </p>
+<p>Started at <%="#{convo.created_at}" %> by  <a href="/users/<%="#{convo.user.username}" %>"><%="#{convo.user.username}" %></a> <br>
+  Last updated: <%="#{convo.updated_at}" %>
+</p>
 <br>
 
 <% end %>
