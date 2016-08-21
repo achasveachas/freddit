@@ -11,14 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821050848) do
+ActiveRecord::Schema.define(version: 20160821061624) do
+
+  create_table "conversations", force: :cascade do |t|
+    t.string   "topic"
+    t.string   "opening_post"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.integer  "thread_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "conversation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
