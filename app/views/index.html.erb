@@ -1,14 +1,15 @@
 <h1>Welcome to Freddit!</h1>
 <br>
-<h2>Join the converstion:</h2><br>
+<h2>Join the conversation:</h2><br>
 <% Conversation.sort_by_last_edited.first(10).each do |convo| %>
 <h3><a href="/conversations/<%="#{convo.id}" %>"><%="#{convo.topic}" %></a></h3>
 <p>Started at <%="#{convo.created_at}" %> by  <a href="/users/<%="#{convo.user.username}" %>"><%="#{convo.user.username}" %></a> <br>
   <% if convo.posts.size > 0 %>
-    Last updated: <%="#{convo.updated_at}" %> by <a href="/users/<%= "#{convo.posts.last.user.username}" %> "><%= "#{convo.posts.last.user.username}" %></a>
+    Last updated: <%="#{convo.posts.last.updated_at}" %> by <a href="/users/<%= "#{convo.posts.last.user.username}" %> "><%= "#{convo.posts.last.user.username}" %></a>
   <% end %>
 
 </p>
 <br>
-
 <% end %>
+
+<h3><a href="/conversations">See more conversations:</a></h3>

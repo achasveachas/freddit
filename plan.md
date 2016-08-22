@@ -1,28 +1,28 @@
 Models
   User
-    Has many conversations
-    has many posts
+    Has many conversations -x
+    has many posts -x
     has the following attributes:
       Required:
-        username
-        password
-        email
+        username -x
+        password -x
+        email -x
       Optional:
-        age
-        location
-        image_url
-        number of posts
-        moderator/admin
+        age -x
+        location -x
+        image_url -x
+        number of posts -x
+        moderator/admin -x
 
   conversation
-    Belongs to a User
-    Has many posts
-    Has an OP
+    Belongs to a User -x
+    Has many posts -x
+    Has an OP -x
 
   Post
-    Belongs to a User
-    Belongs to a conversation
-    Has a time_created and time_modified
+    Belongs to a User -x
+    Belongs to a conversation -x
+    Has a time_created and time_modified -x
 
 Controllers
   User

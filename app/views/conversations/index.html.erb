@@ -1,1 +1,11 @@
-<h1>This is the Model's index page.</h1>
+<h2>Join the conversation:</h2><br>
+<% Conversation.sort_by_last_edited.each do |convo| %>
+<h3><a href="/conversations/<%="#{convo.id}" %>"><%="#{convo.topic}" %></a></h3>
+<p>Started at <%="#{convo.created_at}" %> by  <a href="/users/<%="#{convo.user.username}" %>"><%="#{convo.user.username}" %></a> <br>
+  <% if convo.posts.size > 0 %>
+    Last updated: <%="#{convo.posts.last.updated_at}" %> by <a href="/users/<%= "#{convo.posts.last.user.username}" %> "><%= "#{convo.posts.last.user.username}" %></a>
+  <% end %>
+
+</p>
+<br>
+<% end %>

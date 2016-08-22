@@ -1,19 +1,39 @@
 class UsersController < ApplicationController
 
-  #Index Controller
-  get "/users" do
-    erb :"/users/index.html"
+# Displayse the "Sign Up" form and creates a new user
+  get '/signup' do
+    redirect '/conversations' if logged_in?
+    erb :'users/new.html'
   end
 
-  #New Item Controllers
-  get "/users/new" do
-    erb :"/users/new.html"
+  post '/signup' do
+
+    user = User.create(params)
+    session[:id] = user.id
+
+    if user.save
+      redirect '/conversations'
+    else
+      redirect '/signup'
+    end
   end
 
-  post "/users" do
-    "Create a new item"
+# Displayse the "Log In" form and logs in user
+  get '/login' do
+    redirect '/conversations' if logged_in?
+    erb :'users/login.html'
+  end
 
-    redirect "/users"
+  post '/login' do
+    redirect '/login' if params[:username] == "" || params[:password] == ""
+    login(params[:username], params[:password])
+    redirect '/conversations'
+  end
+
+# Logs out user
+  get '/logout' do
+    logout!
+    redirect '/login'
   end
 
   #Show Item Controller
