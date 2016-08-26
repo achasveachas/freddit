@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826183809) do
+ActiveRecord::Schema.define(version: 20160826185717) do
 
   create_table "conversations", force: :cascade do |t|
     t.string   "topic"
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 20160826183809) do
     t.string   "email"
     t.integer  "age"
     t.string   "location"
-    t.string   "image_url",       default: "---\n:default: http://i0.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Kitten.jpg\n"
+    t.string   "image_url",       default: "http://i0.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Kitten.jpg"
     t.boolean  "moderator",       default: false
     t.boolean  "admin",           default: false
-    t.datetime "created_at",                                                                                                                   null: false
-    t.datetime "updated_at",                                                                                                                   null: false
+    t.datetime "created_at",                                                                                                  null: false
+    t.datetime "updated_at",                                                                                                  null: false
     t.boolean  "banned"
   end
 
