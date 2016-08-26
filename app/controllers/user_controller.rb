@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   patch "/users" do
     "Edits an individual item"
 
-    #redirect "/users/:slug" TODO: update ":slug" with the item"s :ID and uncomment
+    redirect "/users/:slug"
   end
 
   #Delete Item Controller
