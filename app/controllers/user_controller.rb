@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     user = User.create(params)
     session[:id] = user.id
-    login(params[:username], params[:password])
+    user.save
 
     if user.save
       redirect '/'
