@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   post '/signup' do
 
-    user = User.create(params)
+    user = User.create(params[:user])
     session[:id] = user.id
     user.save
 
