@@ -1,41 +1,48 @@
 <h1><%= "#{@user.username.capitalize}" %>'s profile:</h1>
-<p>
-  <br>
-  Username: <%= "#{@user.username}" %><br><br>
-  Email Address: <%= "#{@user.email}" %><br><br>
-  <% if @user.age %>
-    Age: <%= "#{@user.age}" %><br><br>
-  <% end %>
-  <% if @user.location %>
-    Location: <%= "#{@user.location}" %><br>
-  <% end %>
+<img class="profile_pic" src="<%= "#{@user.image_url}" %>"/>
+<div class="profile_info">
+  <p>
+    <strong>Username:</strong> <%= "#{@user.username}" %><br><br>
+    <strong>Email Address:</strong> <%= "#{@user.email}" %><br><br>
+    <% if @user.age %>
+      <strong>Age:</strong> <%= "#{@user.age}" %><br><br>
+    <% end %>
+    <% if @user.location %>
+      <strong>Location:</strong> <%= "#{@user.location}" %><br>
+    <% end %>
+    <br>
+  </p>
+</div>
+<div class="profile_buttons">
   <% if current_user == @user || current_user.moderator %>
-    <form class="" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
+    <form class="profile_buttons" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
       <input type="submit" value="Edit">
     </form>
   <% end %>
-  <br>
-  <% if current_user.moderator %>
+</div>
+<div class="profile_buttons">
+  <% if current_user.moderator && current_user != @user %>
     <% if current_user.banned %>
-      <form class="" action="/users/<%= "#{@user.slug}/unban"%>" method="post">
+      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/unban"%>" method="post">
         <input type="submit" value="Unban">
       </form>
     <% else %>
-      <form class="" action="/users/<%= "#{@user.slug}/ban"%>" method="post">
+      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/ban"%>" method="post">
         <input type="submit" value="Ban">
       </form>
     <% end %>
   <% end %>
-  <br>
-  <% if current_user.admin %>
+</div>
+<div class="profile_buttons">
+  <% if current_user.admin && current_user != @user %>
     <% if @user.moderator %>
-      <form class="" action="/users/<%= "#{@user.slug}/revoke_moderator"%>" method="post">
+      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/revoke_moderator"%>" method="post">
         <input type="submit" value="Revoke Moderator Privilages">
       </form>
     <% else %>
-      <form class="" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
+      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
         <input type="submit" value="Make Moderator">
       </form>
     <% end %>
   <% end %>
-</p>
+</div>

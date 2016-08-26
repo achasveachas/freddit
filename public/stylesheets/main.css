@@ -68,7 +68,24 @@
 
   .error {
     color: #f00;
+    background: lightpink;
     font-weight: bold
+  }
+
+  .profile_info {
+    display: inline;
+  }
+
+  .profile_pic {
+    float: left;
+    width: 200px;
+    padding-right: 10px
+  }
+
+  .profile_buttons {
+    display: inline;
+    padding-right: 5px;
+    padding-bottom: 5px;
   }
 
   .sidebar ul {
