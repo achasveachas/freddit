@@ -19,7 +19,7 @@
       <h1>freddit</h1>
       <% if logged_in? %>
         Welcome, <%= "#{current_user.username}" %>!<br>
-        <a href="/users/<%= "#{current_user.username}" %>">My Profile.</a>
+        <a href="/users/<%= "#{current_user.slug}" %>">My Profile.</a>
         <a href="/logout">Sign Out</a><br>
       <% else %>
         Welcome!

@@ -1,1 +1,22 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1><%= "#{@user.username.capitalize}" %>'s profile:</h1>
+<p>
+  <br>
+  Username: <%= "#{@user.username}" %><br><br>
+  Email Address: <%= "#{@user.email}" %><br><br>
+  <% if @user.age %>
+    Age: <%= "#{@user.age}" %><br><br>
+  <% end %>
+  <% if @user.location %>
+    Location: <%= "#{@user.location}" %><br>
+  <% end %>
+  <% if current_user == @user || current_user.moderator %>
+    <form class="" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
+      <input type="submit" value="Edit">
+    </form>
+  <% end %>
+  <% if current_user.moderator %>
+    <form class="" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
+      <input type="submit" value="Ban">
+    </form>
+  <% end %>
+</p>
