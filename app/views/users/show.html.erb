@@ -17,12 +17,24 @@
   <br>
   <% if current_user.moderator %>
     <% if current_user.banned %>
-      <form class="" action="/users/<%= "#{current_user.slug}/unban"%>" method="post">
+      <form class="" action="/users/<%= "#{@user.slug}/unban"%>" method="post">
         <input type="submit" value="Unban">
       </form>
     <% else %>
-      <form class="" action="/users/<%= "#{current_user.slug}/ban"%>" method="post">
+      <form class="" action="/users/<%= "#{@user.slug}/ban"%>" method="post">
         <input type="submit" value="Ban">
+      </form>
+    <% end %>
+  <% end %>
+  <br>
+  <% if current_user.admin %>
+    <% if @user.moderator %>
+      <form class="" action="/users/<%= "#{@user.slug}/revoke_moderator"%>" method="post">
+        <input type="submit" value="Revoke Moderator Privilages">
+      </form>
+    <% else %>
+      <form class="" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
+        <input type="submit" value="Make Moderator">
       </form>
     <% end %>
   <% end %>

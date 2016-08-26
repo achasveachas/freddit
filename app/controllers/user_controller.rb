@@ -66,19 +66,43 @@ class UsersController < ApplicationController
     redirect "/users"
   end
 
-  post "/users/:slug/ban"
-    user = User.find_by_slug(params[:slug])
-    user.banned = true
-    user.save
+  post "/users/:slug/ban" do
+    if current_user.moderator
+      user = User.find_by_slug(params[:slug])
+      user.banned = true
+      user.save
+    end
 
-    redirect "users/#{user}"
+    redirect "users/#{user.slug}"
   end
 
-  post "/users/:slug/unban"
-    user = User.find_by_slug(params[:slug])
-    user.banned = false
-    user.save
+  post "/users/:slug/unban" do
+    if current_user.moderator
+      user = User.find_by_slug(params[:slug])
+      user.banned = false
+      user.save
+    end
 
-    redirect "users/#{user}"
+    redirect "users/#{user.slug}"
+  end
+
+  post "/users/:slug/revoke_moderator" do
+    if current_user.admin
+      user = User.find_by_slug(params[:slug])
+      user.moderator = false
+      user.save
+    end
+
+    redirect "users/#{user.slug}"
+  end
+
+  post "/users/:slug/moderator" do
+    if current_user.admin
+      user = User.find_by_slug(params[:slug])
+      user.moderator = true
+      user.save
+    end
+
+    redirect "users/#{user.slug}"
   end
 end
