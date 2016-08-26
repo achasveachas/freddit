@@ -27,9 +27,13 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    redirect '/login' if params[:username] == "" || params[:password] == ""
-    login(params[:username], params[:password])
-    redirect '/'
+    if params[:username] == "" || params[:password] == ""
+      flash[:message] = "Please enter a valid username, and password."
+      redirect '/login'
+    else
+      login(params[:username], params[:password])
+      redirect '/'
+    end
   end
 
 # Logs out user
