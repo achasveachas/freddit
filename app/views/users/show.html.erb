@@ -14,9 +14,16 @@
       <input type="submit" value="Edit">
     </form>
   <% end %>
+  <br>
   <% if current_user.moderator %>
-    <form class="" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
-      <input type="submit" value="Ban">
-    </form>
+    <% if current_user.banned %>
+      <form class="" action="/users/<%= "#{current_user.slug}/unban"%>" method="post">
+        <input type="submit" value="Unban">
+      </form>
+    <% else %>
+      <form class="" action="/users/<%= "#{current_user.slug}/ban"%>" method="post">
+        <input type="submit" value="Ban">
+      </form>
+    <% end %>
   <% end %>
 </p>

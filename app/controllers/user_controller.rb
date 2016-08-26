@@ -65,4 +65,20 @@ class UsersController < ApplicationController
 
     redirect "/users"
   end
+
+  post "/users/:slug/ban"
+    user = User.find_by_slug(params[:slug])
+    user.banned = true
+    user.save
+
+    redirect "users/#{user}"
+  end
+
+  post "/users/:slug/unban"
+    user = User.find_by_slug(params[:slug])
+    user.banned = false
+    user.save
+
+    redirect "users/#{user}"
+  end
 end
