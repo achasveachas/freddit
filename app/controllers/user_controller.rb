@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   post '/signup' do
 
     user = User.create(params[:user])
+    user.image_url = "http://i0.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Kitten.jpg" if params[:user][:image_url] == ""
     session[:id] = user.id
     user.save
 
@@ -50,13 +51,26 @@ class UsersController < ApplicationController
 
   #Edit Item Controller
   get "/users/:slug/edit" do
-    erb :"/users/edit.html"
+    @user = User.find_by_slug(params[:slug])
+    if @user == current_user || current_user.moderator
+      erb :"/users/edit.html"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/users/#{@user.slug}"
+    end
   end
 
-  patch "/users" do
-    "Edits an individual item"
-
-    redirect "/users/:slug"
+  post "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    if @user == current_user || current_user.moderator
+      @user.update(params[:user])
+      @user.image_url = "http://i0.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Kitten.jpg" if params[:user][:image_url] == ""
+      @user.save
+      redirect "/users/#{@user.slug}"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/users/#{@user.slug}"
+    end
   end
 
   #Delete Item Controller

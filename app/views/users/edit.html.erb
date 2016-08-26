@@ -1,1 +1,17 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit Profile:</h1>
+<form action="/users/<%= "#{current_user.slug}" %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="username">Username:</label>
+  <input type="text" name="user[username]" id="username" value="<%= "#{@user.username}" %>"><br><br>
+  <label for="email">Email:</label>
+  <input type="email" name="user[email]" id="email" value="<%= "#{@user.email}" %>"><br><br>
+  <label for="password">Password:</label>
+  <input type="password" name="user[password]" id="password" value="<%= "#{@user.password}" %>"><br><br>
+  <label for="email">Age:</label>
+  <input type="text" name="user[age]" id="age" value="<%= "#{@user.age}" %>"><br><br>
+  <label for="email">Location:</label>
+  <input type="text" name="user[location]" id="location" value="<%= "#{@user.location}" %>"><br><br>
+  <label for="image_url">Profile Picture:</label>
+  <input type="text" name="user[image_url]" id="image_url" value="<%= "#{@user.image_url}" %>"><br><br>
+  <input type="submit" value="Update User">
+</form>
