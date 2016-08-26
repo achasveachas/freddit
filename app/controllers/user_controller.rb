@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
 # Displayse the "Sign Up" form and creates a new user
   get '/signup' do
-    redirect '/conversations' if logged_in?
+    redirect '/' if logged_in?
     erb :'users/new.html'
   end
 
@@ -10,9 +10,10 @@ class UsersController < ApplicationController
 
     user = User.create(params)
     session[:id] = user.id
+    login(params[:username], params[:password])
 
     if user.save
-      redirect '/conversations'
+      redirect '/'
     else
       redirect '/signup'
     end
@@ -20,20 +21,20 @@ class UsersController < ApplicationController
 
 # Displayse the "Log In" form and logs in user
   get '/login' do
-    redirect '/conversations' if logged_in?
+    redirect '/' if logged_in?
     erb :'users/login.html'
   end
 
   post '/login' do
     redirect '/login' if params[:username] == "" || params[:password] == ""
     login(params[:username], params[:password])
-    redirect '/conversations'
+    redirect '/'
   end
 
 # Logs out user
   get '/logout' do
     logout!
-    redirect '/login'
+    redirect '/'
   end
 
   #Show Item Controller
