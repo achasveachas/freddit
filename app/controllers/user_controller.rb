@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     if user.save
       redirect '/'
     else
+      flash[:message] = "Please enter a valid username, email address, and password."
       redirect '/signup'
     end
   end

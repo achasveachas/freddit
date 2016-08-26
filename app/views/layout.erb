@@ -27,6 +27,11 @@
         <a href="/login">Log In</a><br>
       <% end %>
     </header>
+    <div class="error">
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %>
+    </div>
 
       <%= yield %>
 

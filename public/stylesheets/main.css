@@ -66,6 +66,11 @@
     width: 30%; /* 240px / 800px */
   }
 
+  .error {
+    color: #f00;
+    font-weight: bold
+  }
+
   .sidebar ul {
     font-size: 14px;
   }
