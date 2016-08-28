@@ -1,12 +1,9 @@
 <h1>Edit Profile:</h1>
+<h2><%= @user.username %></h2><br>
 <form action="/users/<%= "#{current_user.slug}" %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <label for="username">Username:</label>
-  <input type="text" name="user[username]" id="username" value="<%= "#{@user.username}" %>"><br><br>
   <label for="email">Email:</label>
   <input type="email" name="user[email]" id="email" value="<%= "#{@user.email}" %>"><br><br>
-  <label for="password">Password:</label>
-  <input type="password" name="user[password]" id="password" value="<%= "#{@user.password}" %>"><br><br>
   <label for="email">Age:</label>
   <input type="text" name="user[age]" id="age" value="<%= "#{@user.age}" %>"><br><br>
   <label for="email">Location:</label>
@@ -14,4 +11,8 @@
   <label for="image_url">Profile Picture:</label>
   <input type="text" name="user[image_url]" id="image_url" value="<%= "#{@user.image_url}" %>"><br><br>
   <input type="submit" value="Update User">
+</form><br>
+<form action="/users/<%= "#{current_user.slug}" %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete User">
 </form>

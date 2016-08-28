@@ -43,6 +43,10 @@ class UsersController < ApplicationController
     redirect '/'
   end
 
+  get '/users' do
+    erb :"/users/index.html"
+  end
+
   #Show Item Controller
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
@@ -60,7 +64,7 @@ class UsersController < ApplicationController
     end
   end
 
-  post "/users/:slug" do
+  patch "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
     if @user == current_user || current_user.moderator
       @user.update(params[:user])
@@ -75,11 +79,17 @@ class UsersController < ApplicationController
 
   #Delete Item Controller
   delete "/users/:slug/delete" do
-    "Deletes an individual item"
-
+    @user = User.find_by_slug(params[:slug])
+    if @user == current_user || current_user.moderator
+      @user.destroy
+      logout!
+    else
+      flash[:message] = "Whoops! You do not have permission for this action."
+    end
     redirect "/users"
   end
 
+  #Ban actions
   post "/users/:slug/ban" do
     if current_user.moderator
       user = User.find_by_slug(params[:slug])
@@ -100,6 +110,7 @@ class UsersController < ApplicationController
     redirect "users/#{user.slug}"
   end
 
+  #Moderator actions
   post "/users/:slug/revoke_moderator" do
     if current_user.admin
       user = User.find_by_slug(params[:slug])

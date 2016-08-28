@@ -13,36 +13,38 @@
     <br>
   </p>
 </div>
-<div class="profile_buttons">
-  <% if current_user == @user || current_user.moderator %>
-    <form class="profile_buttons" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
-      <input type="submit" value="Edit">
-    </form>
-  <% end %>
-</div>
-<div class="profile_buttons">
-  <% if current_user.moderator && current_user != @user %>
-    <% if current_user.banned %>
-      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/unban"%>" method="post">
-        <input type="submit" value="Unban">
-      </form>
-    <% else %>
-      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/ban"%>" method="post">
-        <input type="submit" value="Ban">
+<% if logged_in? %>
+  <div class="profile_buttons">
+    <% if current_user == @user || current_user.moderator %>
+      <form class="profile_buttons" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
+        <input type="submit" value="Edit">
       </form>
     <% end %>
-  <% end %>
-</div>
-<div class="profile_buttons">
-  <% if current_user.admin && current_user != @user %>
-    <% if @user.moderator %>
-      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/revoke_moderator"%>" method="post">
-        <input type="submit" value="Revoke Moderator Privilages">
-      </form>
-    <% else %>
-      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
-        <input type="submit" value="Make Moderator">
-      </form>
+  </div>
+  <div class="profile_buttons">
+    <% if current_user.moderator && current_user != @user %>
+      <% if current_user.banned %>
+        <form class="profile_buttons" action="/users/<%= "#{@user.slug}/unban"%>" method="post">
+          <input type="submit" value="Unban">
+        </form>
+      <% else %>
+        <form class="profile_buttons" action="/users/<%= "#{@user.slug}/ban"%>" method="post">
+          <input type="submit" value="Ban">
+        </form>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+  <div class="profile_buttons">
+    <% if current_user.admin && current_user != @user %>
+      <% if @user.moderator %>
+        <form class="profile_buttons" action="/users/<%= "#{@user.slug}/revoke_moderator"%>" method="post">
+          <input type="submit" value="Revoke Moderator Privilages">
+        </form>
+      <% else %>
+        <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
+          <input type="submit" value="Make Moderator">
+        </form>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
