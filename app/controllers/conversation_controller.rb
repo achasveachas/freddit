@@ -16,9 +16,18 @@ class ConversationsController < ApplicationController
   end
 
   post "/conversations" do
-    "Create a new item"
-
-    redirect "/conversations"
+    if logged_in?
+      @convo = Conversation.create(params[:conversation])
+      @convo.user = current_user
+      @post = @convo.posts.create(params[:post])
+      @post.user = current_user
+      @convo.save
+      @post.save
+      redirect "/conversations"
+    else
+      flash[:message] = "You need to be signed in to start a conversation."
+      redirect '/login'
+    end
   end
 
   #Show Item Controller
@@ -43,4 +52,5 @@ class ConversationsController < ApplicationController
 
     redirect "/conversations"
   end
+end
 end
