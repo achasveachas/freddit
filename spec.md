@@ -9,7 +9,7 @@ Specs:
 - [x] Ensure that users can't modify content created by other users - Makes sure unly users and moderators can modify user profiles, posts and conversations created by users.
 - [x] Include user input validations - Makes sure conversations aren't created without a topic and at least one post and that posts aren't created without content
 - [x] Display validation failures to user with error message (example form URL e.g. /posts/new) - incorporates flash messages when validations fail
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits
