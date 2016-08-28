@@ -1,24 +1,18 @@
 class PostsController < ApplicationController
 
-  #Index Controller
-  get "/posts" do
-    erb :"/posts/index.html"
-  end
 
   #New Item Controllers
-  get "/posts/new" do
-    erb :"/posts/new.html"
-  end
 
-  post "/posts" do
-    "Create a new item"
-
-    redirect "/posts"
-  end
-
-  #Show Item Controller
-  get "/posts/:slug" do
-    erb :"/posts/show.html"
+  post "/conversations/:id/posts" do
+    if logged_in?
+      convo = Conversation.find_by(id: params[:id])
+      post = convo.posts.create(params[:post])
+      post.user = current_user
+      post.save
+    else
+      flash[:message] = "Whoops! Please log in to join the conversation."
+    end
+    redirect "/conversations/#{convo.id}"
   end
 
   #Edit Item Controller

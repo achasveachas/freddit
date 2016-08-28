@@ -20,10 +20,12 @@
 
   <% end %><br><hr>
 <% end %><br>
+<% if logged_in? %>
 <textarea name="post[content]" rows="8" cols="40" form="reply"></textarea>
-<form action="/posts" method="post" id="reply">
+<form action="/conversations/<%= "#{@convo.id}/posts" %>" method="post" id="reply">
   <input type="submit" value="Reply">
 </form><br><br>
+<% end %>
 <% if logged_in? && (current_user == @convo.user || current_user.moderator) %>
   <form action="/conversations/<%= "#{@convo.id}/delete" %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
