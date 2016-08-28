@@ -1,1 +1,20 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1><%= @convo.topic %></h1>
+<% if current_user == @convo.user || current_user.moderator %>
+  <form action="/conversations/<%= "#{@convo.id}/edit"%>" method="get">
+    <input type="submit" value="Edit Topic">
+  </form>
+<% end %>
+<br><hr><br>
+<% @convo.posts.each do |post| %>
+  <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a> replied at <%= post.created_at %>:<br><br>
+  <strong><%= post.content %></strong><br>
+  <% if current_user == post.user || current_user.moderator %>
+    <form action="/posts/<%= "#{post.id}/edit"%>" method="get">
+      <input type="submit" value="Edit Post">
+    </form>
+  <% end %><br><hr>
+<% end %><br>
+<textarea name="post[content]" rows="8" cols="40" form="reply"></textarea>
+<form action="/posts" method="post" id="reply">
+  <input type="submit" value="Reply">
+</form>

@@ -27,7 +27,7 @@ class ConversationsController < ApplicationController
       @post = @convo.posts.create(params[:post])
       @post.user = current_user
       @post.save
-      redirect "/conversations"
+      redirect "/conversations/#{@convo.id}"
     else
       flash[:message] = "You need to be signed in to start a conversation."
       redirect '/login'
@@ -35,23 +35,24 @@ class ConversationsController < ApplicationController
   end
 
   #Show Item Controller
-  get "/conversations/:slug" do
+  get "/conversations/:id" do
+    @convo = Conversation.find_by(id: params[:id])
     erb :"/conversations/show.html"
   end
 
   #Edit Item Controller
-  get "/conversations/:slug/edit" do
+  get "/conversations/:id/edit" do
     erb :"/conversations/edit.html"
   end
 
   patch "/conversations" do
     "Edits an individual item"
 
-    #redirect "/conversations/:slug" TODO: update ":slug" with the item"s :ID and uncomment
+    #redirect "/conversations/:id" TODO: update ":id" with the item"s :ID and uncomment
   end
 
   #Delete Item Controller
-  delete "/conversations/:slug/delete" do
+  delete "/conversations/:id/delete" do
     "Deletes an individual item"
 
     redirect "/conversations"
