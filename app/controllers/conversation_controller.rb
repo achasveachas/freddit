@@ -16,12 +16,16 @@ class ConversationsController < ApplicationController
   end
 
   post "/conversations" do
+    if params[:conversation][:topic] == "" || params[:post][:content] == ""
+      flash[:message] = "A conversation needs a topic and a first post."
+      redirect '/conversations/new'
+    end
     if logged_in?
       @convo = Conversation.create(params[:conversation])
       @convo.user = current_user
+      @convo.save
       @post = @convo.posts.create(params[:post])
       @post.user = current_user
-      @convo.save
       @post.save
       redirect "/conversations"
     else
@@ -52,5 +56,4 @@ class ConversationsController < ApplicationController
 
     redirect "/conversations"
   end
-end
 end
