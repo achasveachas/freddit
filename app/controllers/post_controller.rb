@@ -16,20 +16,36 @@ class PostsController < ApplicationController
   end
 
   #Edit Item Controller
-  get "/posts/:slug/edit" do
-    erb :"/posts/edit.html"
+  get "/posts/:id/edit" do
+    @post = Post.find_by(id: params[:id])
+    if logged_in? && (@post.user == current_user || current_user.moderator)
+      erb :"/posts/edit.html"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/conversations/#{@post.conversation.id}"
+    end
   end
 
-  patch "/posts" do
-    "Edits an individual item"
-
-    #redirect "/posts/:slug" TODO: update ":slug" with the item"s :ID and uncomment
+  patch "/posts/:id" do
+    @post = Post.find_by(id: params[:id])
+    if logged_in? && (@post.user == current_user || current_user.moderator)
+      @post.update(params[:post])
+      redirect "/conversations/#{@post.conversation.id}"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/conversations/#{@post.conversation.id}"
+    end
   end
 
   #Delete Item Controller
-  delete "/posts/:slug/delete" do
-    "Deletes an individual item"
-
-    redirect "/posts"
+  get "/posts/:id/delete" do
+    @post = Post.find_by(id: params[:id])
+    if logged_in? && (@post.user == current_user || current_user.moderator)
+      @post.destroy
+      redirect "/conversations/#{@post.conversation.id}"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/conversations/#{@post.conversation.id}"
+    end
   end
 end

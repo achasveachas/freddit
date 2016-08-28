@@ -14,10 +14,9 @@
   <% end %>
      replied at <%= post.created_at %>:<br><br>
   <strong><%= post.content %></strong><br><br>
-  <% if logged_in? && (current_user == @convo.user || current_user.moderator) %>
+  <% if logged_in? && (current_user == post.user || current_user.moderator) %>
     <a href="/posts/<%= "#{post.id}/edit" %>">Edit Post</a>
     <a href="/posts/<%= "#{post.id}/delete" %>">Delete Post</a>
-
   <% end %><br><hr>
 <% end %><br>
 <% if logged_in? %>

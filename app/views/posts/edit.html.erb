@@ -1,1 +1,6 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h2>Edit Post:</h2><br>
+<textarea name="post[content]" rows="8" cols="40" form="edit"><%= "#{@post.content}" %></textarea><br>
+<form action="/posts/<%= "#{@post.id}" %>" method="post" id="edit">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="submit" value="Edit Post">
+</form>
