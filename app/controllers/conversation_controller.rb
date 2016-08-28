@@ -7,7 +7,7 @@ class ConversationsController < ApplicationController
 
   #New Item Controllers
   get "/conversations/new" do
-    if logged_in?
+    if logged_in? && !current_user.banned
       erb :"/conversations/new.html"
     else
       flash[:message] = "You need to be signed in to start a conversation."
@@ -20,7 +20,7 @@ class ConversationsController < ApplicationController
       flash[:message] = "A conversation needs a topic and a first post."
       redirect '/conversations/new'
     end
-    if logged_in?
+    if logged_in? && !current_user.banned
       @convo = Conversation.create(params[:conversation])
       @convo.user = current_user
       @convo.save
@@ -43,7 +43,7 @@ class ConversationsController < ApplicationController
   #Edit Item Controller
   get "/conversations/:id/edit" do
     @convo = Conversation.find_by(id: params[:id])
-    if logged_in? && (@convo.user == current_user || current_user.moderator)
+    if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
       erb :"/conversations/edit.html"
     else
       flash[:message] = "Whoops! You do not have permission to edit this page."
@@ -53,7 +53,7 @@ class ConversationsController < ApplicationController
 
   patch "/conversations/:id" do
     @convo = Conversation.find_by(id: params[:id])
-    if logged_in? && (@convo.user == current_user || current_user.moderator)
+    if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
       @convo.update(params[:conversation])
       redirect "/conversations/#{@convo.id}"
     else
@@ -65,7 +65,7 @@ class ConversationsController < ApplicationController
   #Delete Item Controller
   delete "/conversations/:id/delete" do
     @convo = Conversation.find_by(id: params[:id])
-    if logged_in? && (@convo.user == current_user || current_user.moderator)
+    if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
       @convo.posts.delete_all
       @convo.destroy
       redirect "/conversations"

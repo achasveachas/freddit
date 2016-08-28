@@ -32,7 +32,10 @@
     </header>
     <div class="error">
       <% if flash.has?(:message) %>
-        <%= flash[:message] %>
+        <%= flash[:message] %><br>
+      <% end %>
+      <% if logged_in? && current_user.banned %>
+        You have been banned. Please contact a moderator.
       <% end %>
     </div>
 
