@@ -7,7 +7,12 @@ class ConversationsController < ApplicationController
 
   #New Item Controllers
   get "/conversations/new" do
-    erb :"/conversations/new.html"
+    if logged_in?
+      erb :"/conversations/new.html"
+    else
+      flash[:message] = "You need to be signed in to start a conversation."
+      redirect '/login'
+    end
   end
 
   post "/conversations" do

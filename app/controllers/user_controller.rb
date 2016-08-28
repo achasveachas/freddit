@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     user.image_url = "http://i0.wp.com/www.artifacting.com/blog/wp-content/uploads/2010/11/Kitten.jpg" if params[:user][:image_url] == ""
     session[:id] = user.id
     user.save
-
     if user.save
       redirect '/'
     else

@@ -1,1 +1,8 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h2>Start a new conversation:</h2>
+<form action="/conversations" method="post">
+  <label for="username">Username:</label>
+  <input type="text" name="user[username]" placeholder="Username" id="username"><br><br>
+  <label for="email">Email:</label>
+  <input type="email" name="user[email]" placeholder="email" id="email"><br><br>
+  <input type="submit" value="Create User">
+</form>
