@@ -3,10 +3,11 @@ class Conversation < ActiveRecord::Base
   has_many :posts
 
   validates_presence_of :topic
-  validates_presence_of :opening_post
 
   def self.sort_by_last_edited
-    self.order(updated_at: :desc)
+    self.all.to_ary.sort_by do |convo|
+      convo.posts.last.created_at 
+    end
   end
 
 end
