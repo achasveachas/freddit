@@ -4,14 +4,20 @@
     <input type="submit" value="Edit Topic">
   </form>
 <% end %>
-<br><hr><br>
+<br><hr>
 <% @convo.posts.each do |post| %>
-  <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a> replied at <%= post.created_at %>:<br><br>
+  <br><br>
+  <% if !!post.user %>
+    <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>
+  <% else %>
+    Deleted User
+  <% end %>
+     replied at <%= post.created_at %>:<br><br>
   <strong><%= post.content %></strong><br><br>
   <% if logged_in? && (current_user == @convo.user || current_user.moderator) %>
-    <form action="/posts/<%= "#{post.id}/edit"%>" method="get">
-      <input type="submit" value="Edit Post">
-    </form>
+    <a href="/posts/<%= "#{post.id}/edit" %>">Edit Post</a>
+    <a href="/posts/<%= "#{post.id}/delete" %>">Delete Post</a>
+
   <% end %><br><hr>
 <% end %><br>
 <textarea name="post[content]" rows="8" cols="40" form="reply"></textarea>
