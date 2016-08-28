@@ -42,19 +42,36 @@ class ConversationsController < ApplicationController
 
   #Edit Item Controller
   get "/conversations/:id/edit" do
-    erb :"/conversations/edit.html"
+    @convo = Conversation.find_by(id: params[:id])
+    if logged_in? && (@convo.user == current_user || current_user.moderator)
+      erb :"/conversations/edit.html"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/conversations/#{@convo.id}"
+    end
   end
 
-  patch "/conversations" do
-    "Edits an individual item"
-
-    #redirect "/conversations/:id" TODO: update ":id" with the item"s :ID and uncomment
+  patch "/conversations/:id" do
+    @convo = Conversation.find_by(id: params[:id])
+    if logged_in? && (@convo.user == current_user || current_user.moderator)
+      @convo.update(params[:conversation])
+      redirect "/conversations/#{@convo.id}"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/conversations/#{@convo.id}"
+    end
   end
 
   #Delete Item Controller
   delete "/conversations/:id/delete" do
-    "Deletes an individual item"
-
-    redirect "/conversations"
+    @convo = Conversation.find_by(id: params[:id])
+    if logged_in? && (@convo.user == current_user || current_user.moderator)
+      @convo.posts.delete_all
+      @convo.destroy
+      redirect "/conversations"
+    else
+      flash[:message] = "Whoops! You do not have permission to edit this page."
+      redirect "/conversations/#{@convo.id}"
+    end
   end
 end

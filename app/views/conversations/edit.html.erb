@@ -1,1 +1,7 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h2>Edit the conversation topic:</h2><br>
+<form action="/conversations/<%= "#{@convo.id}" %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="topic">Topic:</label>
+  <input type="text" name="conversation[topic]" value="<%= "#{@convo.topic}" %>" id="topic"><br><br>
+  <input type="submit" value="Edit Topic">
+</form>
