@@ -63,7 +63,7 @@ class ConversationsController < ApplicationController
   end
 
   #Delete Item Controller
-  delete "/conversations/:id/delete" do
+  delete "/conversations/:id" do
     @convo = Conversation.find_by(id: params[:id])
     if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
       @convo.posts.delete_all
