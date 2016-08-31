@@ -12,7 +12,11 @@
   <input type="text" name="user[image_url]" id="image_url" value="<%= "#{@user.image_url}" %>"><br><br>
   <input type="submit" value="Update User">
 </form><br>
+<<<<<<< HEAD
 <form action="/users/<%= "#{@user.slug}" %>/delete" method="post">
+=======
+<form action="/users/<%= "#{current_user.slug}" %>" method="post">
+>>>>>>> e45cd1678789905e41605b97424c5937413d2a31
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete User">
 </form>

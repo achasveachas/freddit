@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   #Delete Item Controller
-  delete "/users/:slug/delete" do
+  delete "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
     if @user == current_user || current_user.moderator
       @user.destroy

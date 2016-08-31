@@ -26,7 +26,7 @@
 </form><br><br>
 <% end %>
 <% if logged_in? && (current_user == @convo.user || current_user.moderator) %>
-  <form action="/conversations/<%= "#{@convo.id}/delete" %>" method="post">
+  <form action="/conversations/<%= "#{@convo.id}" %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Conversation">
   </form>
