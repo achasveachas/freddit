@@ -13,7 +13,7 @@
     Deleted User
   <% end %>
      replied at <%= post.created_at %>:<br><br>
-  <strong><%= post.content %></strong><br><br>
+  <strong><%= post.content.gsub(/\n/, "<br>") %></strong><br><br>
   <% if logged_in? && (current_user == post.user || current_user.moderator) && !current_user.banned %>
     <a href="/posts/<%= "#{post.id}/edit" %>">Edit Post</a>
     <a href="/posts/<%= "#{post.id}/delete" %>">Delete Post</a>

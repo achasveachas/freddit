@@ -5,12 +5,12 @@
 <h3><a href="/conversations/<%="#{convo.id}" %>"><%="#{convo.topic}" %></a></h3>
 <p>Started at <%="#{convo.created_at}" %> by
   <% if convo.user %>
-    <a href="/users/<%="#{convo.user.username}" %>"><%="#{convo.user.username}" %></a>
+    <a href="/users/<%="#{convo.user.slug}" %>"><%="#{convo.user.username}" %></a>
   <% else %>
     Deleted User
   <% end %> <br>
   <% if convo.posts.size > 1 %>
-    Last updated: <%="#{convo.posts.last.updated_at}" %> by <a href="/users/<%= "#{convo.posts.last.user.username}" %> "><%= "#{convo.posts.last.user.username}" %></a>
+    Last updated: <%="#{convo.posts.last.updated_at}" %> by <a href="/users/<%= "#{convo.posts.last.user.slug}" %> "><%= "#{convo.posts.last.user.username}" %></a>
   <% end %>
 
 </p>

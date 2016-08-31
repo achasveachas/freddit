@@ -18,7 +18,7 @@
 <% if logged_in? %>
   <div class="profile_buttons">
     <% if current_user == @user || current_user.moderator %>
-      <form class="profile_buttons" action="/users/<%= "#{current_user.slug}/edit"%>" method="get">
+      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/edit"%>" method="get">
         <input type="submit" value="Edit">
       </form>
     <% end %>
