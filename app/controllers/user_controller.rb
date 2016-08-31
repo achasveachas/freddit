@@ -81,7 +81,7 @@ class UsersController < ApplicationController
     @user = User.find_by_slug(params[:slug])
     if @user == current_user || current_user.moderator
       @user.destroy
-      logout!
+      logout! if @user == current_user 
     else
       flash[:message] = "Whoops! You do not have permission for this action."
     end
