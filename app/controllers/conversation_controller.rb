@@ -39,7 +39,7 @@ class ConversationsController < ApplicationController
   #Edit Item Controller
   get "/conversations/:id/edit" do
     @convo = Conversation.find_by(id: params[:id])
-    if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
+    if can_edit?(@convo)
       erb :"/conversations/edit.html"
     else
       flash[:message] = "Whoops! You do not have permission to edit this page."
@@ -49,7 +49,7 @@ class ConversationsController < ApplicationController
 
   patch "/conversations/:id" do
     @convo = Conversation.find_by(id: params[:id])
-    if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
+    if can_edit?(@convo)
       @convo.update(params[:conversation])
       redirect "/conversations/#{@convo.id}"
     else
@@ -61,7 +61,7 @@ class ConversationsController < ApplicationController
   #Delete Item Controller
   delete "/conversations/:id" do
     @convo = Conversation.find_by(id: params[:id])
-    if logged_in? && (@convo.user == current_user || current_user.moderator) && !current_user.banned
+    if can_edit?(@convo)
       @convo.posts.delete_all
       @convo.destroy
       redirect "/conversations"
