@@ -25,6 +25,10 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find(session[:id]) if session[:id]
     end
 
+    def can_edit?
+      logged_in? && (self.user == current_user || current_user.moderator) && !current_user.banned
+    end
+
     def login(username, password)
       user = User.find_by(:username => username)
       if user && user.authenticate(password)

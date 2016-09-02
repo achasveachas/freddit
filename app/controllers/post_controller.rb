@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   #Edit Item Controller
   get "/posts/:id/edit" do
     @post = Post.find_by(id: params[:id])
-    if logged_in? && (@post.user == current_user || current_user.moderator)
+    if logged_in? && (@post.user == current_user || current_user.moderator) && !current_user.banned
       erb :"/posts/edit.html"
     else
       flash[:message] = "Whoops! You do not have permission to edit this page."
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   patch "/posts/:id" do
     @post = Post.find_by(id: params[:id])
-    if logged_in? && (@post.user == current_user || current_user.moderator)
+    if logged_in? && (@post.user == current_user || current_user.moderator) && !current_user.banned
       @post.update(params[:post])
       redirect "/conversations/#{@post.conversation.id}"
     else
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   #Delete Item Controller
   get "/posts/:id/delete" do
     @post = Post.find_by(id: params[:id])
-    if logged_in? && (@post.user == current_user || current_user.moderator)
+    if logged_in? && (@post.user == current_user || current_user.moderator) && !current_user.banned
       @post.destroy
       redirect "/conversations/#{@post.conversation.id}"
     else

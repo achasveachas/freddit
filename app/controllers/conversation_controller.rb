@@ -21,12 +21,8 @@ class ConversationsController < ApplicationController
       redirect '/conversations/new'
     end
     if logged_in? && !current_user.banned
-      @convo = Conversation.create(params[:conversation])
-      @convo.user = current_user
-      @convo.save
-      @post = @convo.posts.create(params[:post])
-      @post.user = current_user
-      @post.save
+      @convo = current_user.conversations.create(params[:conversation])
+      @post = @convo.posts.create(params[:post].merge(:user => current_user))
       redirect "/conversations/#{@convo.id}"
     else
       flash[:message] = "You need to be signed in to start a conversation."

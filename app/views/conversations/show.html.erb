@@ -7,6 +7,7 @@
 <br><hr>
 <% @convo.posts.each do |post| %>
   <br><br>
+  Post # <%= post.id %>
   <% if !!post.user %>
     <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>
   <% else %>
