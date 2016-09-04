@@ -10,8 +10,12 @@ class User < ActiveRecord::Base
   extend Slugifiable::ClassMethods
   include Slugifiable::InstanceMethods
 
-  def number_of_posts
-    self.posts.all.size
+  def ban_button
+    if self.banned
+      "Unban"
+    else
+      "Ban"
+    end
   end
 
 end
