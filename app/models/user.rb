@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   include Slugifiable::InstanceMethods
 
   def ban_button
-    if self.banned
-      "Unban"
-    else
-      "Ban"
-    end
+    self.banned ? "Unban" : "Ban"
+  end
+
+  def mod_button
+    self.moderator ? "Revoke Moderator Privilages" : "Grant Moderator Privilages"
   end
 
 end

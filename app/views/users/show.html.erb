@@ -24,7 +24,7 @@
     <% end %>
   </div>
   <div class="profile_buttons">
-    <% if current_user.moderator && current_user != @user %>
+    <% if current_user.moderator && current_user != @user && !@user.moderator %>
       <form class="profile_buttons" action="/users/<%= "#{@user.slug}/ban"%>" method="post">
         <input type="submit" value="<%= @user.ban_button %>">
       </form>
@@ -32,15 +32,9 @@
   </div>
   <div class="profile_buttons">
     <% if current_user.admin && current_user != @user && !@user.banned %>
-      <% if @user.moderator %>
-        <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
-          <input type="submit" value="Revoke Moderator Privilages">
-        </form>
-      <% else %>
-        <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
-          <input type="submit" value="Make Moderator">
-        </form>
-      <% end %>
+      <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
+        <input type="submit" value="<%= @user.mod_button %>">
+      </form>
     <% end %>
   </div>
 <% end %>
