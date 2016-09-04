@@ -37,7 +37,7 @@
     <% end %>
   </div>
   <div class="profile_buttons">
-    <% if current_user.admin && current_user != @user %>
+    <% if current_user.admin && current_user != @user && !@user.banned %>
       <% if @user.moderator %>
         <form class="profile_buttons" action="/users/<%= "#{@user.slug}/moderator"%>" method="post">
           <input type="submit" value="Revoke Moderator Privilages">
